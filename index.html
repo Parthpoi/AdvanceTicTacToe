@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Tic Tac Toe Game</h1>
+
+    <div class="game-container">
+        <!-- Player 1 Stats -->
+        <div id="playerStatsLeft" class="player-stats">
+            <h3>Player 1 (X)</h3>
+            <div id="player1Small">Small: 3</div>
+            <div id="player1Medium">Medium: 3</div>
+            <div id="player1Large">Large: 3</div>
+        </div>
+
+        <!-- Board and Controls -->
+        <div id="gameBoard" class="game-board">
+            <div id="currentPlayer">Player 1's Turn (X)</div>
+            <div id="status"></div>
+            <div class="controls">
+                <label for="size">Select Size:</label>
+                <select id="size">
+                    <option value="1">Small</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Large</option>
+                </select>
+            </div>
+            <div id="board"></div>
+        </div>
+
+        <!-- Player 2 Stats -->
+        <div id="playerStatsRight" class="player-stats">
+            <h3>Player 2 (O)</h3>
+            <div id="player2Small">Small: 3</div>
+            <div id="player2Medium">Medium: 3</div>
+            <div id="player2Large">Large: 3</div>
+        </div>
+    </div>
+
+    <div class="game-actions">
+        <button id="restart">Restart Game</button>
+        <div id="tutorial">How to Play</div>
+    </div>
+
+    <!-- How to Play Modal -->
+    <div id="howToPlayModal" class="how-to-play-modal">
+        <div class="modal-content">
+            <h2>How to Play</h2>
+            <p>Welcome to Tic Tac Toe!</p>
+            <p>Players take turns placing X or O on the board. The goal is to line up three marks in a row, column, or diagonal.</p>
+            <p><strong>Game Rules:</strong></p>
+            <ul>
+                <li>You can place a Small, Medium, or Large X/O on the board.</li>
+                <li>Player 1 uses "X" (green), and Player 2 uses "O" (blue).</li>
+                <li>You cannot overwrite existing marks unless it's a larger size.</li>
+                <li>The game ends when one player gets 3 in a row or both players run out of moves.</li>
+            </ul>
+            <button id="closeTutorial">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
