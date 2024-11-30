@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updatePlayerStats();
 
         // Check for win or draw
-        if (checkWin(row, col, selectedSize)) {
+        if (checkWin(row, col)) {
             statusDisplay.textContent = `Player ${currentPlayer} wins!`;
             statusDisplay.classList.add("win");
             board.style.pointerEvents = "none"; // Disable further clicks
@@ -106,44 +106,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Check for a win
-    function checkWin(row, col, size) {
+    function checkWin(row, col) {
         const player = boardState[row][col].player;
 
-        // Check row for same size and same player
-        if (boardState[row].every((cell) => cell.player === player && cell.size === size)) {
-            return true;
-        }
+        // Check row, column, and diagonals for the winning condition: 1 small, 1 medium, 1 large
+        const winConditions = [
+            // Rows
+            boardState[row],
+            // Columns
+            boardState.map(r => r[col]),
+            // Diagonal top-left to bottom-right
+            [boardState[0][0], boardState[1][1], boardState[2][2]],
+            // Diagonal top-right to bottom-left
+            [boardState[0][2], boardState[1][1], boardState[2][0]],
+        ];
 
-        // Check column for same size and same player
-        if (boardState.every((r) => r[col].player === player && r[col].size === size)) {
-            return true;
-        }
-
-        // Check diagonal (top-left to bottom-right) for same size and same player
-        if (
-            boardState[0][0].player === player &&
-            boardState[1][1].player === player &&
-            boardState[2][2].player === player &&
-            boardState[0][0].size === size &&
-            boardState[1][1].size === size &&
-            boardState[2][2].size === size
-        ) {
-            return true;
-        }
-
-        // Check diagonal (top-right to bottom-left) for same size and same player
-        if (
-            boardState[0][2].player === player &&
-            boardState[1][1].player === player &&
-            boardState[2][0].player === player &&
-            boardState[0][2].size === size &&
-            boardState[1][1].size === size &&
-            boardState[2][0].size === size
-        ) {
-            return true;
-        }
-
-        return false;
+        // Check if any of the lines has the required combination of small, medium, and large
+        return winConditions.some(line => {
+            const playerMarks = line.filter(cell => cell.player === player);
+            const sizes = playerMarks.map(cell => cell.size).sort();
+            return sizes.length === 3 && sizes[0] === 1 && sizes[1] === 2 && sizes[2] === 3;
+        });
     }
 
     // Check if both players are out of moves
@@ -195,21 +178,21 @@ document.addEventListener("DOMContentLoaded", function () {
     updatePlayerStats();
 
     // Show "How to Play" Modal
-        const howToPlayButton = document.getElementById("tutorial");
-        const howToPlayModal = document.getElementById("howToPlayModal");
-        const closeTutorialButton = document.getElementById("closeTutorial");
+    const howToPlayButton = document.getElementById("tutorial");
+    const howToPlayModal = document.getElementById("howToPlayModal");
+    const closeTutorialButton = document.getElementById("closeTutorial");
 
-        howToPlayButton.addEventListener("click", () => {
-            howToPlayModal.style.display = "flex"; // Show modal
-        });
+    howToPlayButton.addEventListener("click", () => {
+        howToPlayModal.style.display = "flex"; // Show modal
+    });
 
-        closeTutorialButton.addEventListener("click", () => {
+    closeTutorialButton.addEventListener("click", () => {
+        howToPlayModal.style.display = "none"; // Hide modal
+    });
+
+    howToPlayModal.addEventListener("click", (e) => {
+        if (e.target === howToPlayModal) {
             howToPlayModal.style.display = "none"; // Hide modal
-        });
-
-        howToPlayModal.addEventListener("click", (e) => {
-            if (e.target === howToPlayModal) {
-                howToPlayModal.style.display = "none"; // Hide modal
-            }
-        });
+        }
+    });
 });
