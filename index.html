@@ -52,14 +52,17 @@
     <div id="howToPlayModal" class="how-to-play-modal">
         <div class="modal-content">
             <h2>How to Play</h2>
-            <p>Welcome to Tic Tac Toe!</p>
-            <p>Players take turns placing X or O on the board. The goal is to line up three marks in a row, column, or diagonal.</p>
+            <p><span style="color: green">Welcome to Advanced Tic Tac Toe!</span>  The game is simple, but requires strategy. Here’s how to play:</p>
+            <p>Players take turns placing X or O on the board. The goal is to line up three marks of <span style="color: red">same size</span> in a row, column, or diagonal.</p>
             <p><strong>Game Rules:</strong></p>
             <ul>
-                <li>You can place a Small, Medium, or Large X/O on the board.</li>
-                <li>Player 1 uses "X" (green), and Player 2 uses "O" (blue).</li>
-                <li>You cannot overwrite existing marks unless it's a larger size.</li>
-                <li>The game ends when one player gets 3 in a row or both players run out of moves.</li>
+                <li><strong>Objective:</strong> Align three symbols (X or O) of <span style="color: red">same size</span>  in a row, column, or diagonal to win.</li>
+                <li><strong>Players:</strong> Player 1 uses "X", and Player 2 uses "O".</li>
+                <li><strong>Select Symbol Size:</strong> Choose the size of the symbol you want to place (Small, Medium, or Large).</li>
+                <li><strong>Making a Move:</strong> Click on an empty cell to place your symbol. You cannot place a <span style="color: red">smaller</span> symbol on a <span style="color: red">larger</span> one.</li>
+                <li><strong>Switch Turns:</strong> The game automatically switches turns after each move.</li>
+                <li><strong>Winning:</strong> A player wins by getting three of their symbols of <span style="color: red">same size</span>  in a row, column, or diagonal.</li>
+                <li><strong>Draw Condition:</strong> If all cells are filled without a winner, it’s a draw.</li>
             </ul>
             <button id="closeTutorial">Close</button>
         </div>
