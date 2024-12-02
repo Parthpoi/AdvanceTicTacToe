@@ -1,75 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe Game</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<div class="container">
-    <h1>Tic Tac Toe Game</h1>
 
-    <div class="game-container">
+<body class="bg-light">
+<div class="container my-5">
+    <h1 class="text-center mb-4 display-4 text-primary">Tic Tac Toe Game</h1>
+
+    <div class="row">
         <!-- Player 1 Stats -->
-        <div id="playerStatsLeft" class="player-stats">
-            <h3>Player 1 (X)</h3>
-            <div id="player1Small">Small: 3</div>
-            <div id="player1Medium">Medium: 3</div>
-            <div id="player1Large">Large: 3</div>
+        <div class="col-md-3 text-center mb-4">
+            <h3 class="text-success">Player 1 (X)</h3>
+            <div id="player1Small" class="badge bg-success text-wrap my-1">Small: 3</div>
+            <div id="player1Medium" class="badge bg-success text-wrap my-1">Medium: 3</div>
+            <div id="player1Large" class="badge bg-success text-wrap my-1">Large: 3</div>
         </div>
 
-        <!-- Board and Controls -->
-        <div id="gameBoard" class="game-board">
-            <div id="currentPlayer">Player 1's Turn (X)</div>
-            <div id="status"></div>
-            <div class="controls">
-                <label for="size">Select Size:</label>
-                <select id="size">
+        <!-- Game Board and Controls -->
+        <div class="col-md-6 text-center">
+            <div id="currentPlayer" class="h4 text-primary mb-3">Player 1's Turn (X)</div>
+            <div id="status" class="mb-2 text-danger"></div>
+            <div class="mb-3">
+                <label for="size" class="form-label fw-bold">Select Size:</label>
+                <select id="size" class="form-select w-auto d-inline-block">
                     <option value="1">Small</option>
                     <option value="2">Medium</option>
                     <option value="3">Large</option>
                 </select>
             </div>
-            <div id="board"></div>
+            <div id="board" class="d-grid mx-auto"></div>
         </div>
 
         <!-- Player 2 Stats -->
-        <div id="playerStatsRight" class="player-stats">
-            <h3>Player 2 (O)</h3>
-            <div id="player2Small">Small: 3</div>
-            <div id="player2Medium">Medium: 3</div>
-            <div id="player2Large">Large: 3</div>
+        <div class="col-md-3 text-center mb-4">
+            <h3 class="text-primary">Player 2 (O)</h3>
+            <div id="player2Small" class="badge bg-primary text-wrap my-1">Small: 3</div>
+            <div id="player2Medium" class="badge bg-primary text-wrap my-1">Medium: 3</div>
+            <div id="player2Large" class="badge bg-primary text-wrap my-1">Large: 3</div>
         </div>
     </div>
 
-    <div class="game-actions">
-        <button id="restart">Restart Game</button>
-        <div id="tutorial">How to Play</div>
+    <div class="text-center my-4">
+        <button id="vsComputer" class="btn btn-info me-3">Play VS Computer</button>
+        <button id="restart" class="btn btn-warning">Restart Game</button>
+    </div>
+
+    <!-- How to Play Section -->
+    <div class="text-center">
+        <button id="tutorial" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#howToPlayModal">How to Play</button>
     </div>
 
     <!-- How to Play Modal -->
-    <div id="howToPlayModal" class="how-to-play-modal">
-        <div class="modal-content">
-            <h2>How to Play</h2>
-            <p><span style="color: green">Welcome to Advanced Tic Tac Toe!</span>
-            <p>The game is simple, but requires strategy. Here’s how to play:</p>
-
-            <p><strong>Game Rules:</strong></p>
-            <ul>
-                <li><strong>Objective:</strong> Align three symbols (X or O) of <span style="color: red">Different size (1 small, 1 medium, 1 large)</span>  in a row, column, or diagonal to win.</li>
-                <li><strong>Players:</strong> Player 1 uses "X", and Player 2 uses "O".</li>
-                <li><strong>Select Symbol Size:</strong> Choose the size of the symbol you want to place (Small, Medium, or Large).</li>
-                <li><strong>Making a Move:</strong> Click on an empty cell to place your symbol. You can place your larger size symbol on smaller one but You cannot place a <span style="color: red">smaller</span> symbol on a <span style="color: red">larger</span> one.</li>
-                <li><strong>Switch Turns:</strong> The game automatically switches turns after each move.</li>
-                <li><strong>Winning:</strong> A player wins by getting three of their symbols of <span style="color: red">Different size (1 small, 1 medium, 1 large)</span>  in a row, column, or diagonal.</li>
-                <li><strong>Draw Condition:</strong> If all cells are filled without a winner, it’s a draw.</li>
-            </ul>
-            <button id="closeTutorial">Close</button>
+    <div id="howToPlayModal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary">How to Play</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Welcome to Advanced Tic Tac Toe!</strong></p>
+                    <ul>
+                        <li><strong>Objective:</strong> Align three symbols of different sizes (1 small, 1 medium, 1 large) in a row, column, or diagonal to win.</li>
+                        <li><strong>Players:</strong> Player 1 uses "X" and Player 2 uses "O".</li>
+                        <li><strong>Select Symbol Size:</strong> Choose the size (Small, Medium, Large) to place.</li>
+                        <li><strong>Move Rules:</strong> You can place a larger symbol over a smaller one but cannot do the reverse.</li>
+                        <li><strong>Winning:</strong> Complete a row, column, or diagonal with different sizes to win.</li>
+                        <li><strong>Draw Condition:</strong> If all cells are filled without a winner, it’s a draw.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
